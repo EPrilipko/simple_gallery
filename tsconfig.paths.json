@@ -1,0 +1,9 @@
+{
+    "compilerOptions": {
+      "baseUrl": "./src",
+      "paths": {
+        "@typings": ["typings"],
+        "@components": ["components"]
+      }
+    }
+  }

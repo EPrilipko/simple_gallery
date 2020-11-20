@@ -1,0 +1,23 @@
+.galleryWrapper {
+    padding: 30px 0;
+}
+
+.col:not(:last-of-type) {
+    padding-bottom: 15px;
+}
+
+.colContent {
+    width: 150px;
+    overflow: hidden;
+}
+
+.image {
+    width: 150px;
+    height: 150px;
+}
+
+.title {
+    overflow: hidden;
+    text-overflow: ellipsis;
+    white-space: nowrap;
+}

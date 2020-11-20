@@ -1,0 +1,8 @@
+.app {
+    position: relative;
+}
+
+.controls {
+    display: flex;
+    justify-content: space-between;
+}
