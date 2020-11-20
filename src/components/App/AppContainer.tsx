@@ -1,4 +1,6 @@
 import * as React from 'react';
+import { AnyAction } from 'redux';
+import { ThunkDispatch } from 'redux-thunk';
 import { connect } from 'react-redux';
 
 import { StoreState } from '../../store';
@@ -61,7 +63,7 @@ function mapStateToProps(state: StoreState): MapProps {
     }
 }
 
-function mapDispatchToProps(dispatch: any): DispatchProps {
+function mapDispatchToProps(dispatch: ThunkDispatch<StoreState, Error, AnyAction>): DispatchProps {
     return {
         loadAlbums: () => dispatch(loadAlbums())
     };

@@ -1,7 +1,8 @@
 import { reducerWithInitialState } from 'typescript-fsa-reducers';
 
-import * as actions from './actions';
+import { DEFAULT_EXPAND_SIZE } from '../../Config';
 
+import * as actions from './actions';
 import {
     GalleryState as State
 } from './types';
@@ -9,8 +10,8 @@ import {
 class Reducer {
     public static makeInitialState(): State {
         return {
-            expandSize: 5,
-            currentPosition: 5,
+            expandSize: DEFAULT_EXPAND_SIZE,
+            currentPosition: DEFAULT_EXPAND_SIZE,
             selectedAlbumId: null,
             pendingAlbumId: null
         };
@@ -44,19 +45,28 @@ class Reducer {
         };
     }
 
-    public static updateAfterImagesLoaded(state: State): State {
-        const {
-            pendingAlbumId
-        } = state;
-
+    public static resetPositions(state: State): State {
         const {
             expandSize,
             currentPosition
         } = Reducer.makeInitialState();
 
         return {
+            ...state,
             expandSize,
-            currentPosition,
+            currentPosition
+        };
+    }
+
+    public static updateAfterImagesLoaded(state: State): State {
+        const {
+            pendingAlbumId
+        } = state;
+
+        const stateWithResetedPosition = Reducer.resetPositions(state);
+
+        return {
+            ...stateWithResetedPosition,
             selectedAlbumId: pendingAlbumId,
             pendingAlbumId: null
         };
@@ -68,4 +78,5 @@ export const galleryReducer = reducerWithInitialState(Reducer.makeInitialState()
     .case(actions.setCurrentPosition, Reducer.setCurrentPosition)
     .case(actions.setSelectedAlbumId, Reducer.setSelectedAlbumId)
     .case(actions.setPendingAlbumId, Reducer.setPendingAlbumId)
+    .case(actions.resetPositions, Reducer.resetPositions)
     .case(actions.updateAfterImagesLoaded, Reducer.updateAfterImagesLoaded);

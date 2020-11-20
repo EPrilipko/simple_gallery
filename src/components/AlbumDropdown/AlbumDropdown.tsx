@@ -18,7 +18,7 @@ export function AlbumDropdown({
         'Выберите альбом';
 
     return (
-        <div>
+        <React.Fragment>
             Альбом
 
             <Dropdown>
@@ -36,6 +36,6 @@ export function AlbumDropdown({
                     ))}
                 </Dropdown.Menu>
             </Dropdown>
-        </div>
+        </React.Fragment>
     );
 }

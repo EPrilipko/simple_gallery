@@ -30,11 +30,10 @@ export function Gallery({
                                 <Col key={image.id}>
                                     <div className="colContent">
                                         <Image
+                                            src={image.thumbnailUrl}
                                             className="image"
-                                            style={{
-                                                background: `url('${image.thumbnailUrl}')`
-                                            }}
                                             rounded
+                                            alt={image.title}
                                         />
 
                                         <div className="title">

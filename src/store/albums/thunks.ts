@@ -1,7 +1,9 @@
-import axios from 'axios';
 import actionCreatorFactory from 'typescript-fsa';
 import { asyncFactory } from 'typescript-fsa-redux-thunk';
-import { Album } from '@typings';
+
+import { getAlbums } from '../../Api';
+import { selectRandomItems } from '../../Utils';
+import { N_RANDOM_ALBUMS } from '../../Config';
 
 import { StoreState } from '../';
 
@@ -14,10 +16,9 @@ const thunkActionCreator = asyncFactory<StoreState>(
 export const loadAlbums = thunkActionCreator<void, void, Error>(
     'LOAD_ALBUMS',
     async(_, dispatch, getState) => {
-        const albums = (await axios.get<Album[]>(
-            'https://jsonplaceholder.typicode.com/albums'
-        )).data;
+        const albums = await getAlbums();
+        const randomAlbums = selectRandomItems(albums, N_RANDOM_ALBUMS);
 
-        dispatch(actions.loadItems(albums));
+        dispatch(actions.loadItems(randomAlbums));
     }
 );

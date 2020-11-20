@@ -1,9 +1,11 @@
 import * as React from 'react';
 import { Dropdown } from 'react-bootstrap';
 
-const ITEMS = [
-    '1', '2', '3', '4', '5', '6', '7', '8', '9', '10'
-];
+import { times } from '../../Utils';
+import {
+    MIN_EXPAND_SIZE,
+    MAX_EXPAND_SIZE
+} from '../../Config';
 
 interface Props {
     selectedExpandSize: number | null;
@@ -17,7 +19,7 @@ export function ExpandSizeDropdown({
     const label = selectedExpandSize || '#';
 
     return (
-        <div>
+        <React.Fragment>
             Добавлять в галлерею по
 
             <Dropdown>
@@ -26,15 +28,15 @@ export function ExpandSizeDropdown({
                 </Dropdown.Toggle>
 
                 <Dropdown.Menu>
-                    {ITEMS.map(item => (
+                    {times(MIN_EXPAND_SIZE, MAX_EXPAND_SIZE).map(item => (
                         <Dropdown.Item
                             key={item}
-                            eventKey={item}
+                            eventKey={String(item)}
                             onSelect={onSelect}
                         >{item}</Dropdown.Item>
                     ))}
                 </Dropdown.Menu>
             </Dropdown>
-        </div>
+        </React.Fragment>
     );
 }

@@ -1,7 +1,7 @@
-import axios from 'axios';
 import actionCreatorFactory from 'typescript-fsa';
 import { asyncFactory } from 'typescript-fsa-redux-thunk';
-import { Image } from '@typings';
+
+import { getImages } from '../../Api';
 
 import { StoreState } from '../';
 import { updateAfterImagesLoaded } from '../gallery';
@@ -15,12 +15,10 @@ const thunkActionCreator = asyncFactory<StoreState>(
 export const loadImages = thunkActionCreator<number, void, Error>(
     'LOAD_IMAGES',
     async(albumId, dispatch, getState) => {
-        const images = (await axios.get<Image[]>(
-            `https://jsonplaceholder.typicode.com/photos?albumId=${albumId}`
-        )).data;
-
         // timeout to simmulate images fetching delay
-        setTimeout(() => {
+        setTimeout(async () => {
+            const images = await getImages(albumId);
+
             dispatch(actions.loadImagesByAlbumId({
                 albumId,
                 images

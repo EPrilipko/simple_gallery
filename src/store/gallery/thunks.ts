@@ -21,6 +21,7 @@ export const setSelectedAlbumId = thunkActionCreator<number | null, void, Error>
                 dispatch(actions.setPendingAlbumId(selectedId));
                 dispatch(loadImages(selectedId));
             } else {
+                dispatch(actions.resetPositions());
                 dispatch(actions.setSelectedAlbumId(selectedId));
             }
         }

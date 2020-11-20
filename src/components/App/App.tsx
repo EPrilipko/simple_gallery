@@ -23,14 +23,21 @@ export function App({
             {showPreloader && <Preloader />}
 
             <div className="controls">
-                <AlbumDropdown />
+                <div className="dropdown">
+                    <AlbumDropdown />
+                </div>
 
-                {showControls && <ExpandSizeDropdown />}
+                {showControls && <div className="dropdown">
+                    <ExpandSizeDropdown />
+                </div>}
+
             </div>
 
             <Gallery />
 
-            {showControls && <ExpandButton />}
+            {showControls && <div className="expandButton">
+                <ExpandButton />
+            </div>}
         </div>
     );
 }

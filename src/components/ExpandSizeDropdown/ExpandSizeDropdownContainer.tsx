@@ -1,4 +1,5 @@
 import * as React from 'react';
+import { Dispatch } from 'redux';
 import { connect } from 'react-redux';
 
 import { StoreState } from '../../store';
@@ -49,7 +50,7 @@ function mapStateToProps(state: StoreState): MapProps {
     };
 }
 
-function mapDispatchToProps(dispatch: any): DispatchProps {
+function mapDispatchToProps(dispatch: Dispatch): DispatchProps {
     return {
         onSelect: (selectedItem: string | null) => {
             const updatedExpandSize = selectedItem && parseInt(selectedItem);
